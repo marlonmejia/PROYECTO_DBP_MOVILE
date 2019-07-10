@@ -24,12 +24,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="CSB01 CHAT"/>
+                android:text="CENTRO DE LECTURA"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="201810482 - VICTOR ASCUÑA"/>
+                android:text="Tu mejor opción de lectura"/>
 
         </LinearLayout>
 
