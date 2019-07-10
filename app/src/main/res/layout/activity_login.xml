@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity"
+    android:background="@android:color/holo_blue_dark">
 
 
     <LinearLayout
@@ -83,12 +84,5 @@
 
 
     </LinearLayout>
-    <ImageView
-            android:layout_width="0dp"
-            android:layout_height="0dp" app:srcCompat="@android:color/holo_blue_dark"
-            android:id="@+id/imageView" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/loginLayout"
-            app:layout_constraintStart_toStartOf="@+id/loginLayout" android:layout_marginLeft="411dp"
-            android:layout_marginStart="411dp"/>
 
 </android.support.constraint.ConstraintLayout>
