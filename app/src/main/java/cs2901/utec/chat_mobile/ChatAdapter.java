@@ -48,7 +48,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ChatAdapter.ViewHolder holder, int position) {
         try {
             JSONObject element = elements.getJSONObject(position);
-            String name = element.getString("title")+" "+element.getString("short_resume");
+            String name = element.getString("title");//+" "+element.getString("short_resume");
             final String username = element.getString("autor");
             holder.first_line.setText(name);
             holder.second_line.setText(username);
