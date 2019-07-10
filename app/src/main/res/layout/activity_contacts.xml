@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cs2901.utec.chat_mobile.ContactsActivity">
+    tools:context="cs2901.utec.chat_mobile.ContactsActivity"
+    android:background="@android:color/holo_blue_dark">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/main_recycler_view"
