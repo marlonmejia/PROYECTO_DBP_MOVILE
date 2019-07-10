@@ -14,24 +14,6 @@
         >
 
 
-        <EditText
-            android:id="@+id/txtMessage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Escribe un mensaje"
-            android:layout_alignParentBottom="true"
-            android:layout_toLeftOf="@id/btnSend"
-            />
-        <Button
-            android:id="@+id/btnSend"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Enviar"
-            android:onClick="onClickBtnSend"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/main_recycler_view"

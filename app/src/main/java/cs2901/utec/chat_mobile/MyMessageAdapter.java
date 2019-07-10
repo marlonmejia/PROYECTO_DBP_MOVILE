@@ -17,10 +17,12 @@ public class MyMessageAdapter extends RecyclerView.Adapter<MyMessageAdapter.View
 
     public JSONArray elements;
     private Context mContext;
+    private int userFromId;
 
-    public MyMessageAdapter(JSONArray elements, Context mContext) {
+    public MyMessageAdapter(JSONArray elements, Context mContext, int userFromId) {
         this.elements = elements;
         this.mContext = mContext;
+        this.userFromId = userFromId;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -30,8 +32,6 @@ public class MyMessageAdapter extends RecyclerView.Adapter<MyMessageAdapter.View
 
         public ViewHolder(View itemView) {
             super(itemView);
-            friendLine = itemView.findViewById(R.id.element_view_friend_line);
-            myLine = itemView.findViewById(R.id.element_view_me_line);
             container = itemView.findViewById(R.id.element_view_container);
         }
     }
@@ -51,8 +51,8 @@ public class MyMessageAdapter extends RecyclerView.Adapter<MyMessageAdapter.View
         try{
             JSONObject element = elements.getJSONObject(position);
             String mFirstLine = element.getString("content");
-
-                holder.myLine.setText(mFirstLine);
+            holder.myLine.setText(mFirstLine);
+            holder.friendLine.setText("");
 
         }catch (JSONException e){
             e.printStackTrace();

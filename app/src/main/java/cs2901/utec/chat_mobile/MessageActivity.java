@@ -7,6 +7,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -31,68 +33,31 @@ public class MessageActivity extends AppCompatActivity {
         return this;
     }
 
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        TextView first_line;
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+            first_line = itemView.findViewById(R.id.element_view_first_line);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
-        String username = getIntent().getExtras().get("username").toString();
-        setTitle("@"+username);
+        String username = getIntent().getExtras().get("name").toString();
+        setTitle(username);
         mRecyclerView = findViewById(R.id.main_recycler_view);
     }
 
     @Override
     protected void onResume(){
         super.onResume();
-
+        String content = getIntent().getExtras().get("content").toString();
+        Toast toast = Toast.makeText(getApplicationContext(), content, Toast.LENGTH_SHORT);
+        toast.show();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        getChats();
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    try {
-                        Thread.sleep(1500);
-                        getChats();
-                    }
-                    catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        };
-        Thread hilo = new Thread(runnable);
-        hilo.start();
-    }
 
-
-    public void getChats(){
-        final String url = "http://10.0.2.2:8080/resumen";
-        RequestQueue queue = Volley.newRequestQueue(this);
-
-        JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.GET,
-                url,
-                null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            JSONArray data = response.getJSONArray("response");
-                            mAdapter = new MyMessageAdapter(data, getActivity());
-                            mRecyclerView.setAdapter(mAdapter);
-                            mRecyclerView.smoothScrollToPosition(mRecyclerView.getAdapter().getItemCount());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                    }
-                }
-        );
-        queue.add(request);
     }
 }

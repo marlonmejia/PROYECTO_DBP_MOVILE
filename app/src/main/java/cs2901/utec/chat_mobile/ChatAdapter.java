@@ -18,7 +18,6 @@ import org.json.JSONObject;
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     public JSONArray elements;
     private Context context;
-    public String content;
 
     public ChatAdapter(JSONArray elements, Context context){
         this.elements = elements;
@@ -48,8 +47,10 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ChatAdapter.ViewHolder holder, int position) {
         try {
             JSONObject element = elements.getJSONObject(position);
-            String name = element.getString("title");//+" "+element.getString("short_resume");
+            final String name = element.getString("title");
             final String username = element.getString("autor");
+            final String content = element.getString("content");
+            final String id = element.getString("id");
             holder.first_line.setText(name);
             holder.second_line.setText(username);
 
@@ -58,6 +59,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
                 @Override
                 public void onClick(View v) {
                     Intent goToMessage = new Intent(context,MessageActivity.class);
+                    goToMessage.putExtra("user_to_id", id);
+                    goToMessage.putExtra("name", name);
                     goToMessage.putExtra("content",content);
                     context.startActivity(goToMessage);
                 }
