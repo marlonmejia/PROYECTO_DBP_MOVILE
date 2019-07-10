@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/element_view_container"
+    android:layout_height="72dp"
+    android:layout_width="match_parent"
+    android:padding="16dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/element_view_first_line"
+        android:text="This is the first line"
+        android:textSize="16sp"
+        android:textColor="#000"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/element_view_second_line"
+        android:layout_below="@+id/element_view_first_line"
+        android:textSize="14sp"
+        />
+</RelativeLayout>
