@@ -64,18 +64,9 @@ public class MessageActivity extends AppCompatActivity {
         hilo.start();
     }
 
-    public void onClickBtnSend(View v) {
-        postMessage();
-        EditText chatBox = findViewById(R.id.txtMessage);
-        chatBox.setText("");
-    }
 
     public void getChats(){
-        final String userFromId = getIntent().getExtras().get("user_from_id").toString();
-        String userToId = getIntent().getExtras().get("user_to_id").toString();
-        String url = "http://10.0.2.2:8080/messages/<user_from_id>/<user_to_id>";
-        url = url.replace("<user_from_id>", userFromId);
-        url = url.replace("<user_to_id>", userToId);
+        final String url = "http://10.0.2.2:8080/resumen";
         RequestQueue queue = Volley.newRequestQueue(this);
 
         JsonObjectRequest request = new JsonObjectRequest(
@@ -87,8 +78,7 @@ public class MessageActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             JSONArray data = response.getJSONArray("response");
-                            int uID = Integer.parseInt(userFromId);
-                            mAdapter = new MyMessageAdapter(data, getActivity(), uID);
+                            mAdapter = new MyMessageAdapter(data, getActivity());
                             mRecyclerView.setAdapter(mAdapter);
                             mRecyclerView.smoothScrollToPosition(mRecyclerView.getAdapter().getItemCount());
                         } catch (JSONException e) {
@@ -104,38 +94,5 @@ public class MessageActivity extends AppCompatActivity {
                 }
         );
         queue.add(request);
-    }
-
-    public void postMessage(){
-        String url = "http://10.0.2.2:8080/send_messages";
-        RequestQueue queue = Volley.newRequestQueue(this);
-        Map<String, String> params = new HashMap();
-        final String user_from_id = getIntent().getExtras().get("user_from_id").toString();
-        final String user_to_id = getIntent().getExtras().get("user_to_id").toString();
-        final String content = ((EditText)findViewById(R.id.txtMessage)).getText().toString();
-        params.put("user_from_id",user_from_id);
-        params.put("user_to_id", user_to_id);
-        params.put("content", content);
-        JSONObject parameters = new JSONObject(params);
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.POST,
-                url,
-                parameters,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        // TODO
-                    }
-                }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                // TODO: Handle error
-                error.printStackTrace();
-
-            }
-        });
-        queue.add(jsonObjectRequest);
-
     }
 }
